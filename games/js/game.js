@@ -51,17 +51,20 @@ var reset = function () {
 
 // Update game objects
 var update = function (modifier) {
-  if (38 in keysDown) { // Player holding up
+  if (38 in keysDown && hero.y > 0) { // Player holding up
     hero.y -= hero.speed * modifier;
   }
-  if (40 in keysDown) { // Player holding down
-    hero.y += hero.speed * modifier;
+  if (40 in keysDown && hero.y < canvas.offsetHeight) { 
+  // Player holding down
+    hero.y += Math.min(hero.speed * modifier,
+                      canvas.offsetHeight-hero.y-30);
   }
-  if (37 in keysDown) { // Player holding left
+  if (37 in keysDown && hero.x > 0) { // Player holding left
     hero.x -= hero.speed * modifier;
   }
-  if (39 in keysDown) { // Player holding right
-    hero.x += hero.speed * modifier;
+  if (39 in keysDown && hero.x < canvas.offsetWidth) { // Player holding right
+    hero.x += Math.min(hero.speed * modifier,
+                      canvas.offsetWidth-hero.x-30);
   }
 
   // Are they touching?
@@ -123,8 +126,8 @@ var init = function(){
   then = Date.now();
   canvas = document.getElementById("game");
   ctx = canvas.getContext("2d");
-  canvas.width = 512;
-  canvas.height = 480;
+  //canvas.width = 512;
+  //canvas.height = 480;
 
   // Background image
   bgReady = false;
