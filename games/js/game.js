@@ -44,9 +44,6 @@ window.addEventListener("keyup", function (e) {
 
 // Reset the game when the player catches a monster
 var reset = function () {
-  hero.x = canvas.offsetWidth / 2;
-  hero.y = canvas.offsetHeight / 2;
-
   // Throw the monster somewhere on the screen randomly
   monster.x = 32 + (Math.random() * (canvas.width - 64));
   monster.y = 32 + (Math.random() * (canvas.height - 64));
@@ -160,6 +157,10 @@ var init = function(){
 
   // Handle keyboard controls
   keysDown = {};
+  
+  //position hero
+  hero.x = canvas.offsetWidth / 2;
+  hero.y = canvas.offsetHeight / 2;
 };
 
 
